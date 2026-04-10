@@ -1,0 +1,72 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="col-xs-12 text-center">
+        <h2 class="section-title">Medical Centers</h2>
+        <p class="section-subtitle">Select a medical center to view available specialists</p>
+        <hr>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="medicalCenters">
+    <div class="col-xs-12 col-md-4">
+      <div class="list-group">
+        <button type="button" 
+                class="list-group-item" 
+                *ngFor="let center of medicalCenters" 
+                (click)="selectCenter(center)"
+                [class.active]="center === selectedCenter">
+          <h4 class="list-group-item-heading" style="font-weight: 500; font-size: 1.5em;">{{ center.center }}</h4>
+          <p class="list-group-item-text" style="text-transform: uppercase; font-size: 0.85em; color: #9ecdf7; font-weight: bold;">{{ center.specialty }}</p>
+        </button>
+      </div>
+    </div>
+
+    <div class="col-xs-12 col-md-8">
+      
+      <div class="well well-lg" style="background: #fff;" *ngIf="selectedCenter">
+        <h2 style="margin-top: 0; color: #337ab7; font-weight: bold;">{{ selectedCenter.center }}</h2>
+        <p><span class="glyphicon glyphicon-map-marker"></span> <strong> Address:</strong> {{ selectedCenter.address }}, {{ selectedCenter.city }}</p>
+        <p><span class="glyphicon glyphicon-phone"></span> <strong> Phone:</strong> {{ selectedCenter.phone }}</p>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6 col-md-6" *ngFor="let doctor of filteredSpecialists">
+          <div class="doctor-card">
+            
+            <div class="doctor-image-container">
+              <img [src]="'/' + doctor.imageUrl" [alt]="doctor.name" class="doctor-img">
+            </div>
+            
+            <div class="doctor-details">
+              <h3 class="doctor-name">{{ doctor.name }}</h3>
+              <p class="doctor-specialty">{{ doctor.specialty }}</p>
+              <p class="doctor-center">
+                <span class="glyphicon glyphicon-map-marker"></span> {{ selectedCenter.center }}
+              </p>
+            </div>
+
+            <div class="appointment-section">
+              <label for="slot-select">Select Appointment:</label>
+              
+              <select [(ngModel)]="selectedSlots[doctor.name]" class="form-control slot-dropdown">
+                <option value="" disabled selected>Choose a date & hour</option>
+                <option *ngFor="let slot of doctor.availableSlots" [value]="slot.date + ' - ' + slot.hour">
+                  {{ slot.date }} - {{ slot.hour }}
+                </option>
+              </select>
+              
+              <div class="action-buttons">
+                <button (click)="onBook(doctor)" class="btn btn-primary btn-block">
+                  Book Now
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

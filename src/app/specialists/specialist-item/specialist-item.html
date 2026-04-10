@@ -1,0 +1,27 @@
+<div class="doctor-card">
+  <div class="doctor-image-container">
+    <img [src]="'/' + specialist.imageUrl" [alt]="specialist.name" class="doctor-img">
+  </div>
+  
+  <div class="doctor-details">
+    <h3 class="doctor-name">{{ specialist.name }}</h3>
+    <p class="doctor-specialty">{{ specialist.specialty }}</p>
+  </div>
+
+  <div class="appointment-section">
+    <label for="slot-select">Select Appointment:</label>
+    
+    <select [(ngModel)]="selectedSlot" class="form-control slot-dropdown">
+      <option value="" disabled selected>Choose a date & hour</option>
+      <option *ngFor="let slot of specialist.availableSlots" [value]="slot.date + ' - ' + slot.hour">
+        {{ slot.date }} - {{ slot.hour }}
+      </option>
+    </select>
+    
+    <div class="action-buttons">
+      <button (click)="onBook()" class="btn btn-primary btn-block">
+        Book Now
+      </button>
+    </div>
+  </div>
+</div>

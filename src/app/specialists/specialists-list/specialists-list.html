@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 text-center">
+      <h2 class="section-title">Medical Specialists</h2>
+      <p class="section-subtitle">Select a professional to view available appointments</p>
+      <hr>
+    </div>
+  </div>
+
+  <div class="specialists-grid">
+    <app-specialist-item 
+      *ngFor="let specialistEl of specialists" 
+      [specialist]="specialistEl">
+    </app-specialist-item>
+  </div>
+</div>

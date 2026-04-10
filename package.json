@@ -29,6 +29,11 @@
     "@angular/forms": "^21.0.0",
     "@angular/platform-browser": "^21.0.0",
     "@angular/router": "^21.0.0",
+    "bootstrap": "^3.4.1",
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "jquery": "^3.7.1",
+    "mongoose": "^9.3.3",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0"
   },
